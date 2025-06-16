@@ -1,57 +1,107 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 
 const Register = () => {
+  const navigate = useNavigate();
+  const [registerData, setRegisterData] = useState({
+    fullName: '',
+    email: '',
+    password: '',
+    crPassword: '',
+    profilePicture: null,
+  });
+
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+    if (name === 'profilePicture') {
+      setRegisterData((prev) => ({ ...prev, [name]: files[0] }));
+    } else {
+      setRegisterData((prev) => ({ ...prev, [name]: value }));
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Registered Data:", registerData);
+
+    // Here you would send data to the backend using FormData:
+    // const formData = new FormData();
+    // formData.append('fullName', registerData.fullName);
+    // formData.append('email', registerData.email);
+    // formData.append('password', registerData.password);
+    // formData.append('profilePicture', registerData.profilePicture);
+    // axios.post('/api/register', formData);
+  };
+
   return (
     <div className="min-h-screen bg-white text-black flex items-center justify-center px-6">
-      <div className="w-full max-w-md p-8 border rounded-md shadow-md">
-        <h2 className="text-3xl font-bold mb-6 text-center">Create Account</h2>
+      <div className="w-full max-w-md p-8 border rounded-md shadow-md bg-white">
+        <h2 className="text-3xl font-bold mb-6 text-center text-[#1A3C5A]">Create Account</h2>
 
-        <form className="space-y-4">
+        <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
-            <label className="block mb-1 font-medium">Full Name</label>
+            <label className="block mb-1 font-medium text-[#1A3C5A]">Full Name</label>
             <input
               type="text"
-              className="w-full border px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              name="fullName"
+              value={registerData.fullName}
+              onChange={handleChange}
+              className="w-full border px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FF4081] text-[#1A3C5A] bg-white"
               placeholder="Hemant Patel"
+              required
             />
           </div>
+
           <div>
-            <label className="block mb-1 font-medium">Email</label>
+            <label className="block mb-1 font-medium text-[#1A3C5A]">Email</label>
             <input
               type="email"
-              className="w-full border px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              name="email"
+              value={registerData.email}
+              onChange={handleChange}
+              className="w-full border px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FF4081] text-[#1A3C5A] bg-white"
               placeholder="example@email.com"
+              required
             />
           </div>
+
           <div>
-            <label className="block mb-1 font-medium">Password</label>
+            <label className="block mb-1 font-medium text-[#1A3C5A]">Password</label>
             <input
               type="password"
-              className="w-full border px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              name="password"
+              value={registerData.password}
+              onChange={handleChange}
+              className="w-full border px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FF4081] text-[#1A3C5A] bg-white"
               placeholder="••••••••"
+              required
             />
           </div>
+
           <div>
-            <label className="block mb-1 font-medium">Confirm Password</label>
+            <label className="block mb-1 font-medium text-[#1A3C5A]">Confirm Password</label>
             <input
               type="password"
-              className="w-full border px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              name="cfPassword"
+              value={registerData.crPassword}
+              onChange={handleChange}
+              className="w-full border px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FF4081] text-[#1A3C5A] bg-white"
               placeholder="••••••••"
+              required
             />
           </div>
 
           <button
             type="submit"
-            className="w-full bg-black text-white py-2 rounded-md hover:bg-gray-800 transition"
+            className="w-full bg-[#1A3C5A] text-white py-2 rounded-md font-semibold hover:bg-[#FF4081] transition-colors duration-200"
           >
             Register
           </button>
         </form>
 
-        <p className="text-center mt-4">
+        <p className="text-center mt-4 text-[#1A3C5A]">
           Already have an account?{' '}
-          <Link to="/login" className="text-blue-600 hover:underline">
+          <Link to="/login" className="text-[#FF4081] hover:underline font-medium">
             Log in
           </Link>
         </p>
@@ -61,4 +111,3 @@ const Register = () => {
 };
 
 export default Register;
-
