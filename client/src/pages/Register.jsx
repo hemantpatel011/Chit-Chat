@@ -91,17 +91,6 @@ const Register = () => {
             />
           </div>
 
-          <div>
-            <label className="block mb-1 font-medium text-[#1A3C5A]">Profile Picture</label>
-            <input
-              type="file"
-              name="profilePicture"
-              accept="image/*"
-              onChange={handleChange}
-              className="w-full px-3 py-2 rounded-md border border-gray-300 file:text-white file:bg-[#1A3C5A] file:border-0 file:px-4 file:py-2 file:rounded-md"
-            />
-          </div>
-
           <button
             type="submit"
             className="w-full bg-[#1A3C5A] text-white py-2 rounded-md font-semibold hover:bg-[#FF4081] transition-colors duration-200"
